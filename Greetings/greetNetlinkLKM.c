@@ -18,6 +18,7 @@
 /*Global variables of this LKM*/
 static struct sock *nl_sk = NULL;       /*Kernel space Netlink socket ptr*/
 
+
 /* Reciever function for Data received over netlink
  * socket from user space
  * skb - socket buffer, a unified data structiure for 
@@ -151,6 +152,16 @@ static void __exit NetlinkGreetings_exit(void) {
 }
 
 
+
+static void nlmsg_dump(struct nlmsghdr *nlh)
+{
+    printk(KERN_INFO "Hdr length is %d\n", nlh -> nlmsg_len);
+    printk(KERN_INFO "Hdr type is %i\n", nlh -> nlmsg_type);
+    printk(KERN_INFO "Hdr flag is %i\n", nlh -> nlmsg_flags);
+    printk(KERN_INFO "Hdr seq is %d\n", nlh -> nlmsg_seq);
+    printk(KERN_INFO "Hdr pid is %d\n", nlh -> nlmsg_pid);
+
+}
 /*Every Linux Kernel Module has Init and Exit functions - just
  * like normal C program has main() fn.*/
 
